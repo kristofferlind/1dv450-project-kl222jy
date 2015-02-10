@@ -1,0 +1,24 @@
+<h1>Manage users (admin)</h1>
+
+<table class="table">
+    <tr>
+        <td>Name</td>
+        <td>Email</td>
+        <td>Key</td>
+        <td>Actions</td>
+    </tr>
+    <% @users.each do |user| %>
+
+    <tr>
+        <td><%= link_to user.name, user %></td>
+        <td><%= user.email %></td>
+        <td><%= user.api_key %></td>
+        <td>
+            <%= link_to "Generate", user_generate_path(user), method: :put, class: "btn btn-success" %> 
+            <%= link_to "Revoke", user_revoke_path(user), method: :put, class: "btn btn-warning" %> 
+            <%= link_to "", user, method: :delete, class: "btn btn-danger glyphicon glyphicon-trash" %>
+        </td>
+    </tr>
+
+    <% end %>
+</table>
