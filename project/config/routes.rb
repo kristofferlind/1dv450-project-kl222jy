@@ -60,6 +60,9 @@ Rails.application.routes.draw do
   get 'register' => 'users#new'
   post 'login' => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
+  get '/auth/:provider/callback' => 'home#auth_callback'
+
+
   resources :users, only: [:new, :create, :index, :show, :destroy] do  #skipping :edit, :update
     put 'generate' => 'users#generate'
     put 'revoke' => 'users#revoke'
@@ -68,7 +71,10 @@ Rails.application.routes.draw do
   #api resources
   namespace :api do
     namespace :v1, defaults: {format: :json} do
+      get 'creators/me' => 'creators#me'  #needs to come before resources :creators (routes are greedy)
       resources :tags
+      resources :stories
+      resources :creators
     end
   end
 
