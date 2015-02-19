@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  #Generate an api key on registration
   before_create :generate_api_key
   before_save { self.email = email.downcase }
   has_secure_password

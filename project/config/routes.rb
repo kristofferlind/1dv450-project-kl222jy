@@ -67,7 +67,7 @@ Rails.application.routes.draw do
 
   #api resources
   namespace :api do
-    namespace :v1 do
+    namespace :v1, defaults: {format: :json} do
       resources :tags
     end
   end

@@ -1,3 +1,7 @@
 <h1>API key</h1>
-Your API key is: <%= @user.api_key %> 
+<% if current_user.api_key? %>
+Your API key is: <%= @user.api_key %>
 <%= link_to "Remove key", user_revoke_path(@user), method: :put, class: "btn btn-danger" %>
+<% else %>
+You do not have an api key
+<% end %>
