@@ -2,6 +2,7 @@ module Api::V1
   class ApiController < ApplicationController
     before_action :require_api_key
     # before_action :require_logged_in
+    skip_before_filter :verify_authenticity_token
 
     protected
       def current_creator
@@ -22,6 +23,12 @@ module Api::V1
 
       def require_logged_in
         !current_creator.nil?
+      end
+
+      def require_same
+        unless current_creator?(current_creator)
+          return head :forbidden
+        end
       end
 
     private
