@@ -6,6 +6,10 @@ module Api::V1
       render json: Creator.all
     end
 
+    def show
+      render json: Creator.find(params[:id])
+    end
+
     def me
       render json: current_creator
     end

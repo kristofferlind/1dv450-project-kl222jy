@@ -4,7 +4,11 @@ module Api::V1
     before_action :require_same, only: :destroy
 
     def index
-      render json: Story.all.to_json(:include => [:creator, :position, :tags])
+      if params[:creator_id]
+        render json: Creator.find(params[:creator_id]).stories.to_json(:include => [:creator, :position, :tags])        
+      else
+        render json: Story.all.to_json(:include => [:creator, :position, :tags])
+      end
     end
 
     def create
