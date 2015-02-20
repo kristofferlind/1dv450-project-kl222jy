@@ -73,8 +73,12 @@ Rails.application.routes.draw do
     namespace :v1, defaults: {format: :json} do
       get 'creators/me' => 'creators#me'  #needs to come before resources :creators (routes are greedy)
       resources :tags
-      resources :stories
-      resources :creators
+      resources :stories do
+        resources :tags
+      end
+      resources :creators do
+        resources :stories
+      end
     end
   end
 

@@ -9,11 +9,8 @@ class Creator < ActiveRecord::Base
     return creator
   end
 
-  # def self.create_with_omniauth(auth)
-  #   create! do |creator|
-  #     creator.provider = auth["provider"]
-  #     creator.uid = auth["uid"]
-  #     creator.name = auth["info"]["name"]
-  #   end
-  # end
+  def to_json(options={})
+    options[:except] ||= [:uid, :provider]
+    super(options)
+  end
 end
