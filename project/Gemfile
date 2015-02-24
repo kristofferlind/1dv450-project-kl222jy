@@ -37,6 +37,8 @@ gem 'bootstrap-sass'
 gem 'autoprefixer-rails'
 gem 'omniauth-github', :github => 'intridea/omniauth-github'
 gem 'jwt'
+gem 'rabl'
+gem 'kaminari'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

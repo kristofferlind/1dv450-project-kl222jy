@@ -3,6 +3,7 @@ module Api::V1
     before_action :require_api_key
     # before_action :require_logged_in
     skip_before_filter :verify_authenticity_token
+    include ApiHelper
 
     protected
       def current_creator

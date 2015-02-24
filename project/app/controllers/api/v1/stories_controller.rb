@@ -5,35 +5,31 @@ module Api::V1
 
     def index
       if params[:creator_id]
-        render json: Creator.find(params[:creator_id]).stories.to_json(:include => [:creator, :position, :tags])        
+        @stories = Creator.find(params[:creator_id]).stories.order("id DESC").page(params[:page]).per(params[:limit])
       else
-        render json: Story.all.to_json(:include => [:creator, :position, :tags])
+        @stories = Story.all.order("id DESC").page(params[:page]).per(params[:limit])
       end
     end
 
     def create
       creator = current_creator
-      story = creator.stories.new(story_params)
-      story.position = Position.where(position_params).first_or_create
-      if story.position && story.save
-        render json: story.to_json(:include => [:creator, :position, :tags]), status: 201
-      else
+      @story = creator.stories.new(story_params)
+      @story.position = Position.where(position_params).first_or_create
+      unless @story.position && @story.save
         return head :bad_request
       end
     end
 
     def update
-      story = Story.find(params[:id])
-      story.position = Position.where(position_params).first_or_create
-      if story.update_attributes(story_params)
-        render json: Story.find(params[:id]).to_json(:include => [:creator, :position, :tags])
-      else
+      @story = Story.find(params[:id])
+      @story.position = Position.where(position_params).first_or_create
+      unless @story.update_attributes(story_params)
         render json: {message: 'Story not found'}, status: 404
       end
     end
 
     def show
-      render json: Story.find(params[:id]).to_json(:include => [:creator, :position, :tags])
+      @story = Story.find(params[:id])
     end
 
     def destroy

@@ -4,34 +4,31 @@ module Api::V1
 
     def index
       if (params[:story_id])
-        render json: Story.find(params[:story_id]).tags
+        @tags = Story.find(params[:story_id]).tags.order("id DESC").page(params[:page]).per(params[:limit])
       else
-        render json: Tag.all
+        @tags = Tag.all.order("id DESC").page(params[:page]).per(params[:limit])
       end
     end
 
     def create
       if (params[:story_id])
         story = Story.find(params[:story_id])
-        tag = story.tags.create(tag_params)   #new doesn't work? need the savecheck
+        @tag = story.tags.create(tag_params)   #new doesn't work? need the savecheck
       else
-        tag = Tag.create(tag_params)
+        @tag = Tag.create(tag_params)
       end
-      puts tag
-      if tag.valid?
-        render json: tag
-      else
+      unless @tag.valid?
         render json: {message: 'Tag already exists'}, status: 400
       end
     end
 
     def show
-      render json: Tag.find(params[:id])
+      @tag = Tag.find(params[:id])
     end
 
     def destroy
       tag = Tag.find(params[:id])
-      if story && story.destroy
+      if tag && tag.destroy
         render json: {message: 'Tag successfully deleted'}
       else
         render json: {message: 'Tag not found'}, status: 404

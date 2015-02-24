@@ -3,15 +3,15 @@ module Api::V1
     before_action :require_logged_in, except: [:index, :show]
 
     def index
-      render json: Creator.all
+      @creators = Creator.all.order("id DESC").page(params[:page]).per(params[:limit])
     end
 
     def show
-      render json: Creator.find(params[:id])
+      @creator = Creator.find(params[:id])
     end
 
     def me
-      render json: current_creator
+      @creator = current_creator
     end
   end
 end
