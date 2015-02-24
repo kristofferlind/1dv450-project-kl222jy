@@ -6,6 +6,20 @@ module Api::V1
     def index
       if params[:creator_id]
         @stories = Creator.find(params[:creator_id]).stories.order("id DESC").page(params[:page]).per(params[:limit])
+      elsif params[:latitude] && params[:longitude]
+ 
+        # @stories = Position.near([params[:latitude], params[:longitude]], 100, :units => :km).stories.page(params[:page]).per(params[:limit])
+
+        #code above would be preferable..
+        positions = Position.near([params[:latitude], params[:longitude]], 100, :units => :km)
+        @stories = []
+        positions.each do |position|
+          position.stories.each do |story|
+            @stories.push(story)
+          end
+        end
+        render 'positional'   #needed because of paging
+
       else
         @stories = Story.all.order("id DESC").page(params[:page]).per(params[:limit])
       end

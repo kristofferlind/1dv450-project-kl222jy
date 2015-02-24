@@ -72,6 +72,7 @@ GEM
     execjs (2.3.0)
     faraday (0.9.1)
       multipart-post (>= 1.2, < 3)
+    geocoder (1.2.7)
     globalid (0.3.1)
       activesupport (>= 4.1.0)
     hashie (3.4.0)
@@ -195,6 +196,7 @@ DEPENDENCIES
   bootstrap-sass
   byebug
   coffee-rails (~> 4.1.0)
+  geocoder
   jbuilder (~> 2.0)
   jquery-rails
   jwt
