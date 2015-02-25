@@ -1,6 +1,6 @@
 module Api::V1
   class StoriesController < ApiController
-    before_action :require_logged_in, except: :index
+    before_action :require_logged_in, except: [:index, :show]
     before_action :require_same, only: :destroy
 
     def index
@@ -20,6 +20,8 @@ module Api::V1
         end
         render 'positional'   #needed because of paging
 
+      elsif params[:query]
+        @stories = Story.where(name: params[:query]).order("id DESC").page(params[:page]).per(params[:limit])
       else
         @stories = Story.all.order("id DESC").page(params[:page]).per(params[:limit])
       end
