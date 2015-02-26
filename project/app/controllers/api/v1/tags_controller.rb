@@ -4,9 +4,9 @@ module Api::V1
 
     def index
       if (params[:story_id])
-        @tags = Story.find(params[:story_id]).tags.order("id DESC").page(params[:page]).per(params[:limit])
+        @tags = Story.find(params[:story_id]).tags.order("id DESC").page(params[:page]).per(params[:limit]).includes(:stories)
       else
-        @tags = Tag.all.order("id DESC").page(params[:page]).per(params[:limit])
+        @tags = Tag.all.order("id DESC").page(params[:page]).per(params[:limit]).includes(:stories)
       end
     end
 

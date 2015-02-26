@@ -3,7 +3,7 @@ module Api::V1
     before_action :require_logged_in, except: [:index, :show]
 
     def index
-      @creators = Creator.all.order("id DESC").page(params[:page]).per(params[:limit])
+      @creators = Creator.all.order("id DESC").page(params[:page]).per(params[:limit]).includes(:stories)
     end
 
     def show

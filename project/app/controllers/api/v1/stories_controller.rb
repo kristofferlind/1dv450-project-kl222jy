@@ -5,25 +5,18 @@ module Api::V1
 
     def index
       if params[:creator_id]
-        @stories = Creator.find(params[:creator_id]).stories.order("id DESC").page(params[:page]).per(params[:limit])
+        @stories = Creator.find(params[:creator_id]).stories.order("id DESC").page(params[:page]).per(params[:limit]).includes(:tags, :creator, :position)
       elsif params[:latitude] && params[:longitude]
- 
-        # @stories = Position.near([params[:latitude], params[:longitude]], 100, :units => :km).stories.page(params[:page]).per(params[:limit])
+        #Would be neat, but doesn't work (activerelation error)
+        # @stories = Position.near([params[:latitude], params[:longitude]], 100, :units => :km).all.stories.page(params[:page]).per(params[:limit])
 
-        #code above would be preferable..
-        positions = Position.near([params[:latitude], params[:longitude]], 100, :units => :km)
-        @stories = []
-        positions.each do |position|
-          position.stories.each do |story|
-            @stories.push(story)
-          end
-        end
-        render 'positional'   #needed because of paging
-
+        #Seems a bit complicated, but it works
+        positions = Position.near([params[:latitude], params[:longitude]], 100, :units => :km, :select => "stories.*") #.page(params[:page]).per(params[:limit])
+        @stories = Story.all.joins(:position).merge(positions).page(params[:page]).per(params[:limit]).includes(:tags, :creator)
       elsif params[:query]
-        @stories = Story.where(name: params[:query]).order("id DESC").page(params[:page]).per(params[:limit])
+        @stories = Story.where(name: params[:query]).order("id DESC").page(params[:page]).per(params[:limit]).includes(:tags, :creator, :position)
       else
-        @stories = Story.all.order("id DESC").page(params[:page]).per(params[:limit])
+        @stories = Story.all.order("id DESC").page(params[:page]).per(params[:limit]).includes(:tags, :creator, :position)
       end
     end
 
