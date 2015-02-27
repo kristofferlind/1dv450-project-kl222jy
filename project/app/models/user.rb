@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   before_create :generate_api_key
   before_save { self.email = email.downcase }
   has_secure_password
+  has_many :hooks
 
   validates :name,  presence: true, length: { maximum: 100 }
   validates :email, presence: true, length: { maximum: 500 }, format: { with: /@/ }, uniqueness: { case_sensitive: false }

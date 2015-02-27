@@ -22,7 +22,8 @@
 		"ca8ae4c4-1bf0-e010-ae8f-59167b7a82ee",
 		"b688dba5-b11d-44e3-dc44-502b7113de38",
 		"16a36714-c8d2-d297-fe21-721d3c6050a5",
-		"47880ee0-b7ee-205b-fbb4-683e03e3da38"
+		"47880ee0-b7ee-205b-fbb4-683e03e3da38",
+		"fadc1758-5cd4-e184-1841-6ff939aa61da"
 	],
 	"folders": [],
 	"timestamp": 1424358850522,
@@ -468,6 +469,28 @@
 			"helperAttributes": {},
 			"collectionId": "08d0df42-fcc8-8b5b-08a5-fb3da4960192",
 			"synced": false
+		},
+		{
+			"id": "fadc1758-5cd4-e184-1841-6ff939aa61da",
+			"headers": "Authorization: {{Authorization}}\nClientKey: {{ClientKey}}\nContent-Type: application/json\n",
+			"url": "http://localhost:3000/api/v1/hooks",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"name": "http://localhost:3000/api/v1/hooks",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1425063322029,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"collectionId": "08d0df42-fcc8-8b5b-08a5-fb3da4960192",
+			"synced": false,
+			"rawModeData": "{\"event\":\"save\", \"model\":\"story\", \"callbackUrl\":\"http://posttestserver.com/post.php\"}"
 		}
 	]
 }

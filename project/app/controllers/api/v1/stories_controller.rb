@@ -24,17 +24,13 @@ module Api::V1
       creator = current_creator
       @story = creator.stories.new(story_params)
       @story.position = Position.where(position_params).first_or_create
-      unless @story.position && @story.save
-        return head :bad_request
-      end
+      @story.save
     end
 
     def update
       @story = Story.find(params[:id])
       @story.position = Position.where(position_params).first_or_create
-      unless @story.update_attributes(story_params)
-        render json: {message: 'Story not found'}, status: 404
-      end
+      @story.update_attributes(story_params)
     end
 
     def show
@@ -43,11 +39,8 @@ module Api::V1
 
     def destroy
       story = Story.find(params[:id])
-      if story && story.destroy
-        render json: {message: 'Story successfully deleted'}
-      else
-        render json: {message: 'Story not found'}, status: 404
-      end
+      story.destroy
+      render json: {message: 'Story successfully deleted'}
     end
 
     private

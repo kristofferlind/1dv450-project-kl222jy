@@ -16,5 +16,6 @@ class ApiKeyThrottle < Rack::Throttle::Hourly
       requests = cache_get(cache_key(request)).to_i
       remaining = max_per_window - requests
       remaining = 0 if remaining.nil? || remaining < 0
+      remaining
     end
 end

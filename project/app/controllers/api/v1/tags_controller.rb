@@ -28,11 +28,8 @@ module Api::V1
 
     def destroy
       tag = Tag.find(params[:id])
-      if tag && tag.destroy
-        render json: {message: 'Tag successfully deleted'}
-      else
-        render json: {message: 'Tag not found'}, status: 404
-      end
+      tag.destroy
+      render json: {message: 'Tag successfully deleted'}
     end
 
     private
