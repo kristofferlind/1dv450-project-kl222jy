@@ -119,6 +119,7 @@ GEM
     rabl (0.11.6)
       activesupport (>= 2.3.14)
     rack (1.6.0)
+    rack-cors (0.3.1)
     rack-test (0.6.3)
       rack (>= 1.0)
     rack-throttle (0.4.0)
@@ -206,6 +207,7 @@ DEPENDENCIES
   kaminari
   omniauth-github!
   rabl
+  rack-cors
   rack-throttle
   rails (= 4.2.0)
   redis

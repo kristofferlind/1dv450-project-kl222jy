@@ -2,6 +2,8 @@
 
 var React = require('react/addons');
 var MapApi = window.google.maps;
+// var AppDispatcher = require('../dispatcher/app-dispatcher');
+var StoryActions = require('../actions/story-actions');
 
 //Need to keep track of markers outside react, following react rules we should repaint map on every change
 //but it's too slow..
@@ -50,6 +52,14 @@ var GoogleMap = React.createClass({
     //     });
     //     MapApi.markers.push(marker);
     // },
+    createStory: function() {
+        var story = {
+                name: 'great story',
+                description: 'this is a story'
+            };
+
+        StoryActions.add(story);
+    },
     refreshMarkers: function() {
         this.setState({map: this.state.map});
     },
