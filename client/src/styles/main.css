@@ -1,41 +1,47 @@
-/* Stiziles */
-
-html, body {
-  background: #222222;
+body {
+    margin-top: 50px;
 }
 
-/* main */
-
-.main {
-  width: 100%;
-  height: 100%;
-  background: #222222;
-  color: #fff;
+main {
+    position: absolute;
+    top: 50px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
 }
 
-.main img {
-  width: 103px;
-  height: 89px;
-  margin-bottom: 10px;
-  text-align: center;
+.no-gutter > [class*='col-'] {
+    padding-right:0;
+    padding-left:0;
 }
 
-/* transitions */
-
-.fade-enter {
-  opacity: 0.01;
-  transition: opacity .5s ease-in;
+.google-map {
+    height: 100%;
 }
 
-.fade-enter.fade-enter-active {
-  opacity: 1;
+.story-filter {
+    position: absolute;
+    top: 21px;
+    left: 100px;
+    width: 30%;
+    z-index: 100;
 }
 
-.fade-leave {
-  opacity: 1;
-  transition: opacity .5s ease-in;
+.story-list-container {
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    overflow-y: scroll;
 }
 
-.fade-leave.fade-leave-active {
-  opacity: 0.01;
+.story-item {
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: -15px;
+    margin-top: 5px;
+}
+
+.full-height {
+    height: 100%;
 }
