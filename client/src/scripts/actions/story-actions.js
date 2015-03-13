@@ -21,6 +21,10 @@ var StoryActions = {
         dispatch(ActionTypes.LOAD_STORIES);
         WebAPIUtilities.loadStories();
     },
+    loadMoreStories: function(page) {
+        dispatch(ActionTypes.LOAD_MORE_STORIES, page);
+        WebAPIUtilities.loadMoreStories(page);
+    },
     remove: function(story) {
         dispatch(ActionTypes.DESTROY_STORY, story);
         WebAPIUtilities.removeStory(story);

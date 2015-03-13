@@ -1,6 +1,6 @@
 'use strict';
 
-var RootURL = 'http://localhost:3000'
+var RootURL = 'http://localhost:3000';
 var APIRoot = RootURL + '/api';
 
 var AppConstants = {
@@ -11,6 +11,7 @@ var AppConstants = {
         CHANGE: 'change',
         CREATE_STORY: 'create-story',
         LOAD_STORIES: 'load-stories',
+        LOAD_MORE_STORIES: 'load-more-stories',
         RECEIVE_STORIES: 'reveive-stories',
         RECEIVE_STORY: 'reveive-story',
         DESTROY_STORY: 'destroy-story',

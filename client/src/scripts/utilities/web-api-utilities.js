@@ -6,6 +6,13 @@ var request = require('superagent');
 
 var APIEndpoints = AppConstants.APIEndpoints;
 
+var handleErrors = function(error, response) {
+    if (response.status === 401 || response.status === 403) {
+        //make this a message instead, where user can opt to login
+        window.location = AppConstants.URLS.LOGIN_PAGE;
+    }
+};
+
 var WebAPIUtilities = {
     getToken: function() {
         return localStorage.getItem('token');
@@ -36,7 +43,20 @@ var WebAPIUtilities = {
                     return;
                 }
 
-                ServerActions.receiveStories(response.body.stories);
+                ServerActions.receiveStories(response.body);
+            });
+    },
+    loadMoreStories: function(page) {
+        request.get(APIEndpoints.STORIES + '?page=' + page)
+            .accept('application/json')
+            .set('ClientKey', '6c747debaa8a1d177cc23d03f726f1a2')
+            .end(function(error, response) {
+                if (error || response.error) {
+                    handleErrors(error, response);
+                    return;
+                }
+
+                ServerActions.receiveMoreStories(response.body);
             });
     },
     removeStory: function(story) {
@@ -70,12 +90,5 @@ var WebAPIUtilities = {
             });
     },
 };
-
-var handleErrors = function(error, response) {
-    if (response.status === 401 || response.status === 403) {
-        //make this a message instead, where user can opt to login
-        window.location = AppConstants.URLS.LOGIN_PAGE;
-    }
-}
 
 module.exports = WebAPIUtilities;

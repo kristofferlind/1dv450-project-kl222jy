@@ -15,6 +15,9 @@ var ServerActions = {
     receiveStories: function(stories) {
         dispatch(ActionTypes.RECEIVE_STORIES, stories);
     },
+    receiveMoreStories: function(stories) {
+        dispatch(ActionTypes.RECEIVE_MORE_STORIES, stories);
+    },
     receiveStory: function(story) {
         dispatch(ActionTypes.RECEIVE_STORY, story);
     },

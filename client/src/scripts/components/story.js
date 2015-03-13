@@ -24,21 +24,28 @@ var Story = React.createClass({
             isModalOpen: !this.state.isModalOpen
         });
     },
+    filter: function() {
+        this.props.onFilter(this.props.story.creator.name);
+    },
     render: function() {
         var story = this.props.story;
-        var tags = [];
-        if (story.tags.length > 0) {
-            story.tags.forEach(function(tag) {
-                tags.push(tag.name);
-            });
-            tags = tags.join(', ');
-        }
+        var tags = function() {
+            var tags = [];
+
+            if (story.tags.length > 0) {
+                story.tags.forEach(function(tag) {
+                    tags.push(tag.name);
+                });
+                tags = tags.join(', ');
+            }
+            return tags;
+        };
         return (
             <div className="story-item">
                 <Alert bsStyle="info" onDismiss={this.handleDelete}>
                     <h3 onClick={this.handleEdit}>{story.name}</h3>
-                    <p>{story.description} - {story.creator.name}</p>
-                    <p>{tags}</p>
+                    <p>{story.description} - <span onClick={this.filter}>{story.creator.name}</span></p>
+                    <p>{tags()}</p>
                 </Alert>
             </div>
         );
