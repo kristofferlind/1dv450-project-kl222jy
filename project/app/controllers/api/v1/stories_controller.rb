@@ -24,13 +24,26 @@ module Api::V1
       creator = current_creator
       @story = creator.stories.new(story_params)
       @story.position = Position.where(position_params).first_or_create
+      @input_tags = params[:tags]
+      @tags = []
+      @input_tags.each do |tag|
+        @tags.push(Tag.where(name: tag).first_or_create)
+      end
+      @story.tags = @tags
       @story.save
     end
 
     def update
       @story = Story.find(params[:id])
       @story.position = Position.where(position_params).first_or_create
-      @story.update_attributes(story_params)
+      @input_tags = params[:tags]
+      @tags = []
+      @input_tags.each do |tag|
+        @tags.push(Tag.where(name: tag).first_or_create)
+      end
+      @story.tags = @tags
+      @story.save
+      # @story.update_attributes(story_params)
     end
 
     def show
@@ -46,7 +59,7 @@ module Api::V1
     private
 
       def story_params
-        params.require(:story).permit(:name, :description, :position => [:longitude, :latitude])
+        params.require(:story).permit(:name, :description, :tags, :position => [:longitude, :latitude])
       end
 
       def position_params
