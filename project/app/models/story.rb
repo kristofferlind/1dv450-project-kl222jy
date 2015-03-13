@@ -4,7 +4,7 @@ class Story < ActiveRecord::Base
   has_and_belongs_to_many :tags, :join_table => :stories_tags
   after_create :call_save_listeners
   after_save :call_save_listeners
-  after_destroy :call_remove_listeners
+  # after_destroy :call_remove_listeners
 
   require 'uri'
   require 'net/http'
