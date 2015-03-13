@@ -2,10 +2,27 @@
 
 var React = require('react/addons');
 var Alert = require('react-bootstrap').Alert;
+var StoryActions = require('../actions/story-actions');
+var OverlayMixin = require('react-bootstrap').OverlayMixin;
+var EditStoryModal = require('./edit-story-modal');
 
 var Story = React.createClass({
+    mixins: [OverlayMixin],
+    getInitialState: function() {
+        return {
+            isModalOpen: false
+        };
+    },
     handleDelete: function() {
-        console.log('delete');
+        StoryActions.remove(this.props.story);
+    },
+    handleEdit: function() {
+        this.toggleModal();
+    },
+    toggleModal: function() {
+        this.setState({
+            isModalOpen: !this.state.isModalOpen
+        });
     },
     render: function() {
         var story = this.props.story;
@@ -19,11 +36,20 @@ var Story = React.createClass({
         return (
             <div className="story-item">
                 <Alert bsStyle="info" onDismiss={this.handleDelete}>
-                    <h3>{story.name}</h3>
+                    <h3 onClick={this.handleEdit}>{story.name}</h3>
                     <p>{story.description} - {story.creator.name}</p>
                     <p>{tags}</p>
                 </Alert>
             </div>
+        );
+    },
+    renderOverlay: function() {
+        if (!this.state.isModalOpen) {
+            return <span/>;
+        }
+
+        return (
+            <EditStoryModal story={this.props.story} onToggle={this.toggleModal} />
         );
     }
 });

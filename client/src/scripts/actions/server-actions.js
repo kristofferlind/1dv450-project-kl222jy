@@ -14,6 +14,15 @@ var dispatch = function(eventName, data) {
 var ServerActions = {
     receiveStories: function(stories) {
         dispatch(ActionTypes.RECEIVE_STORIES, stories);
+    },
+    receiveStory: function(story) {
+        dispatch(ActionTypes.RECEIVE_STORY, story);
+    },
+    removedStory: function(story) {
+        dispatch(ActionTypes.STORY_REMOVED, story);
+    },
+    updatedStory: function(story) {
+        dispatch(ActionTypes.STORY_UPDATED, story);
     }
 };
 

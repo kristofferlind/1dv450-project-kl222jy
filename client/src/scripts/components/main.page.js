@@ -8,11 +8,6 @@ var StoryStore = require('../stores/story-store');
 var StoryActions = require('../actions/story-actions');
 
 var MainPage = React.createClass({
-    // getDefaultProps: function() {
-    //     return {
-    //         stories: []
-    //     };
-    // },
     getInitialState: function() {
         return {
             filterText: '',
@@ -39,12 +34,6 @@ var MainPage = React.createClass({
             stories: StoryStore.getAll()
         });
     },
-    // storiesChanged: function() {
-    //     console.log('stories changed');
-
-    //     // use setstate instead, forceUpdate is inefficient
-    //     this.forceUpdate();
-    // },
     render: function() {
         var stories = this.state.stories; //StoryStore.getAll(); //this.props.stories;
         var filterText = this.state.filterText;

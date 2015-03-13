@@ -4,6 +4,8 @@ var React = require('react/addons');
 var MapApi = window.google.maps;
 // var AppDispatcher = require('../dispatcher/app-dispatcher');
 var StoryActions = require('../actions/story-actions');
+var OverlayMixin = require('react-bootstrap').OverlayMixin;
+var CreateStoryModal = require('./create-story-modal');
 
 //Need to keep track of markers outside react, following react rules we should repaint map on every change
 //but it's too slow..
@@ -11,11 +13,18 @@ MapApi.markers = [];
 
 
 var GoogleMap = React.createClass({
+    mixins: [OverlayMixin],
+    lastPosition: {},
     getDefaultProps: function () {
         return {
             initialZoom: 3,
             mapCenterLat: 25,
             mapCenterLng: 25,
+        };
+    },
+    getInitialState: function() {
+        return {
+            isModalOpen: false
         };
     },
     componentDidMount: function (rootNode) {
@@ -30,43 +39,24 @@ var GoogleMap = React.createClass({
         this.setState({map: map});
 
         //event logic
-        // MapApi.event.addListener(map, 'click', this.handleMapClick);
-        // MapApi.event.addListener(map, 'dblclick', this.handleMapDoubleClick);
+        MapApi.event.addListener(map, 'click', this.handleMapClick);
     },
-    // handleMapClick: function(event) {
-    //     // console.log(event);
-    //     // this.state.map.setCenter(event.LatLng);
-    //     // this.setState({map: this.state.map});
-    //     this.placeMarker(event.LatLng);
-    // },
-    // handleMapDoubleClick: function(event) {
-    //     // event.preventDefault();
-    //     // console.log(event);
-    //     // this.state.map.setCenter(event.LatLng);
-    //     // this.setState({map: this.state.map});
-    // },
-    // placeMarker: function(location) {
-    //     var marker = new MapApi.Marker({
-    //         position: location,
-    //         map: this.state.map
-    //     });
-    //     MapApi.markers.push(marker);
-    // },
-    createStory: function() {
-        var story = {
-                name: 'great story',
-                description: 'this is a story'
-            };
-
-        StoryActions.add(story);
+    handleMapClick: function(event) {
+        console.log(event);
+        this.lastPosition = event.latLng;
+        this.toggleModal();
+    },
+    toggleModal: function() {
+        this.setState({
+            isModalOpen: !this.state.isModalOpen
+        });
     },
     refreshMarkers: function() {
         this.setState({map: this.state.map});
     },
     render: function () {
         if (this.state && this.state.markers) {
-            var oldMarkers = MapApi.markers;
-            oldMarkers.forEach(function(marker) {
+            MapApi.markers.forEach(function(marker) {
                 marker.setMap(null);
             });
         }
@@ -95,6 +85,15 @@ var GoogleMap = React.createClass({
         }
         return (
             <div className='google-map'></div>
+        );
+    },
+    renderOverlay: function() {
+        if (!this.state.isModalOpen) {
+            return <span/>;
+        }
+
+        return (
+            <CreateStoryModal position={this.lastPosition} onToggle={this.toggleModal} />
         );
     }
 });

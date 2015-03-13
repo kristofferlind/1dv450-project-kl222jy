@@ -15,10 +15,19 @@ var dispatch = function(eventName, data) {
 var StoryActions = {
     add: function(story) {
         dispatch(ActionTypes.CREATE_STORY, story);
+        WebAPIUtilities.createStory(story);
     },
     loadStories: function() {
         dispatch(ActionTypes.LOAD_STORIES);
         WebAPIUtilities.loadStories();
+    },
+    remove: function(story) {
+        dispatch(ActionTypes.DESTROY_STORY, story);
+        WebAPIUtilities.removeStory(story);
+    },
+    update: function(story) {
+        dispatch(ActionTypes.UPDATE_STORY, story);
+        WebAPIUtilities.updateStory(story);
     }
 };
 

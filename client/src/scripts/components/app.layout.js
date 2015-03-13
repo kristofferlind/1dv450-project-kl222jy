@@ -15,6 +15,14 @@ require('../../styles/main.css');
 
 var App = React.createClass({
     render: function() {
+        var shouldShowLogin = function() {
+            var token = localStorage.getItem('token');
+            if (!token) {
+                return <NavItem eventKey={4} href="http://localhost:3000/auth/github">Login</NavItem>;
+            } else {
+                return '';
+            }
+        };
         return (
             <div className="container">
                 <header>
@@ -23,6 +31,7 @@ var App = React.createClass({
                             <NavItem eventKey={1} href="#/">Home</NavItem>
                             <NavItem eventKey={2} href="#/about">About</NavItem>
                             <NavItem eventKey={3} href="#/contact">Contact</NavItem>
+                            {shouldShowLogin()}
                         </Nav>
                     </Navbar>
                 </header>
