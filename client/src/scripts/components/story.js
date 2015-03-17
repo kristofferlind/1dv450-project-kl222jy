@@ -2,6 +2,8 @@
 
 var React = require('react/addons');
 var Alert = require('react-bootstrap').Alert;
+var Button = require('react-bootstrap').Button;
+var Glyphicon = require('react-bootstrap').Glyphicon;
 var StoryActions = require('../actions/story-actions');
 var OverlayMixin = require('react-bootstrap').OverlayMixin;
 var EditStoryModal = require('./edit-story-modal');
@@ -24,28 +26,27 @@ var Story = React.createClass({
             isModalOpen: !this.state.isModalOpen
         });
     },
-    filter: function() {
-        this.props.onFilter(this.props.story.creator.name);
+    filter: function(data, e) {
+        this.props.onFilter(data);
     },
     render: function() {
+        var component = this;
         var story = this.props.story;
-        var tags = function() {
-            var tags = [];
-
-            if (story.tags.length > 0) {
-                story.tags.forEach(function(tag) {
-                    tags.push(tag.name);
-                });
-                tags = tags.join(', ');
-            }
-            return tags;
-        };
+        var tags = '';
+        if (story.tags.length > 0) {
+            tags = story.tags.map(function(tag) {
+                return (
+                    <span key={tag.id}><a href="#" onClick={component.filter.bind(null, tag.name)}>{tag.name}</a> </span>
+                );
+            });
+        }
+         // <Button bsStyle="warning" bsSize="small" onClick={this.handleEdit}><Glyphicon glyph="pencil" /></Button>
         return (
-            <div className="story-item">
+            <div key={story.id} onDoubleClick={this.handleEdit} className="story-item">
                 <Alert bsStyle="info" onDismiss={this.handleDelete}>
-                    <h3 onClick={this.handleEdit}>{story.name}</h3>
-                    <p>{story.description} - <span onClick={this.filter}>{story.creator.name}</span></p>
-                    <p>{tags()}</p>
+                    <h3>{story.name}</h3>
+                    <p>{story.description} - <a href="#" onClick={this.filter.bind(null, story.creator.name)}>{story.creator.name}</a></p>
+                    <p>{tags}</p>
                 </Alert>
             </div>
         );

@@ -3,6 +3,7 @@
 var React = require('react/addons');
 var Story = require('./story');
 var InfiniteScroll = require('react-infinite-scroll')(React);
+var Alert = require('react-bootstrap').Alert;
 
 var StoryList = React.createClass({
     getDefaultProps: function() {
@@ -50,6 +51,14 @@ var StoryList = React.createClass({
         return (
             <div onScroll={this.onScrolling} className="story-list-container bg-primary">
                 <div ref="storyList" className="story-list">
+                    <div className="story-item">
+                        <Alert bsStyle="success">
+                            <strong>Info:</strong>
+                            <p>Click map to create story</p>
+                            <p>Doubleclick story to edit</p>
+                            <p>Click links to filter</p>
+                        </Alert>
+                    </div>
                     {stories}
                 </div>
             </div>

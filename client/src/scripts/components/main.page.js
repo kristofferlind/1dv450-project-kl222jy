@@ -7,6 +7,7 @@ var StoryList = require('./story-list');
 var StoryStore = require('../stores/story-store');
 var StoryActions = require('../actions/story-actions');
 
+
 var MainPage = React.createClass({
     getInitialState: function() {
         return {

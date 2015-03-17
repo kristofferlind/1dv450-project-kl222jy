@@ -43,6 +43,7 @@ gem 'geocoder'
 gem 'rack-throttle'
 gem 'redis'
 gem 'rack-cors'
+gem 'faker'
 
 
 group :development, :test do

@@ -43,7 +43,7 @@ var addStory = function(story) {
     _stories.push(story);
 };
 
-var updateStory = function(index, story) {
+var updateStory = function(story) {
     var storyIndex = findIndex(story.id);
     _stories[storyIndex] = story;
 };

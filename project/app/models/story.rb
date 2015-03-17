@@ -17,14 +17,14 @@ class Story < ActiveRecord::Base
         uri = URI.parse(hook.callbackUrl)
         response = Net::HTTP.post_form(uri, "data" => "test")
 
-        puts "test"
-        puts response
+        # puts "test"
+        # puts response
 
-        if response.is_a?(Net::HTTPSuccess)
-          puts "success"
-        else
-          puts "failed"
-        end
+        # if response.is_a?(Net::HTTPSuccess)
+        #   puts "success"
+        # else
+        #   puts "failed"
+        # end
         return true
       end
     end
