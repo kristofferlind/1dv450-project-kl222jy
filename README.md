@@ -32,3 +32,6 @@ Set Authentication(token set in cookies when logging in) and ClientKey(api key) 
 
 Authentication: go to http://localhost:3000/auth/github, successful login sets cookie named token, Authentication value should be "Bearer tokenvalue"
 ClientKey: log into registration application to get api key
+
+##Features
+Infinite scroll, rate limiter, oauth, webhooks, xml support, versioning, filtering, tags on creation, paging, react, flux
