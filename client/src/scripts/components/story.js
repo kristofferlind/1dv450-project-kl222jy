@@ -36,11 +36,10 @@ var Story = React.createClass({
         if (story.tags.length > 0) {
             tags = story.tags.map(function(tag) {
                 return (
-                    <span key={tag.id}><a href="#" onClick={component.filter.bind(null, tag.name)}>{tag.name}</a> </span>
+                    <span><a href="#" onClick={component.filter.bind(null, tag.name)}>{tag.name}</a> </span>
                 );
             });
         }
-         // <Button bsStyle="warning" bsSize="small" onClick={this.handleEdit}><Glyphicon glyph="pencil" /></Button>
         return (
             <div key={story.id} onDoubleClick={this.handleEdit} className="story-item">
                 <Alert bsStyle="info" onDismiss={this.handleDelete}>

@@ -2,7 +2,6 @@
 
 var React = require('react/addons');
 var MapApi = window.google.maps;
-// var AppDispatcher = require('../dispatcher/app-dispatcher');
 var StoryActions = require('../actions/story-actions');
 var OverlayMixin = require('react-bootstrap').OverlayMixin;
 var CreateStoryModal = require('./create-story-modal');
@@ -42,7 +41,6 @@ var GoogleMap = React.createClass({
         MapApi.event.addListener(map, 'click', this.handleMapClick);
     },
     handleMapClick: function(event) {
-        console.log(event);
         this.lastPosition = event.latLng;
         this.toggleModal();
     },
