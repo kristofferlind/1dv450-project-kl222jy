@@ -16,8 +16,9 @@ var StoryStore = assign({}, EventEmitter.prototype, {
     },
     getPageAmount: function() {
         if (_links.last) {
-            var lasthref = _links.last.href;
-            return lasthref.substr(lasthref.length -1);
+            var startsAt = _links.last.href.indexOf('page=');
+            var number = _links.last.href.substr(startsAt + 5);
+            return number;
         }
         return 0;
     },
