@@ -1,23 +1,25 @@
 #Project (MapTales?)
 
-##Getting started
-* bundle install
-* rake db:migrate
-* rake db:seed
-* go to (https://github.com/settings/applications/new) set homepage url to "http://localhost:3000" and callback to "http://localhost:3000/auth/github/callback"
-* set github_client_id, github_client_secret in project/config/secrets.yml
-* install redis (http://redis.io/download)
-* redis-server
-* rails s
+`command` <-run in terminal
 
-You can now find the registration application at http://localhost:3000
+##Getting started
+1. `bundle install`
+2. `rake db:migrate`
+3. `rake db:seed`
+4. go to (https://github.com/settings/applications/new) set homepage url to "http://localhost:3000" and callback to "http://localhost:3000/auth/github/callback"
+5. set github_client_id, github_client_secret in project/config/secrets.yml
+6. install redis (http://redis.io/download)
+7. `redis-server`
+8. `rails s`
+
+You can now find the registration application at http://localhost:3000  
 Account information in db/seeds.rb
 
 ###Running the client application
-* install node (https://nodejs.org/download/)
-* npm install
-* npm install -g grunt-cli
-* grunt serve
+1. install node (https://nodejs.org/download/)
+2. `npm install`
+3. `npm install -g grunt-cli`
+4. `grunt serve`
 
 Client application should now have started and opened in a browser
 
