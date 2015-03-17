@@ -11,7 +11,7 @@ Make sure you are in /project folder
 4. go to (https://github.com/settings/applications/new) set homepage url to "http://localhost:3000" and callback to "http://localhost:3000/auth/github/callback"
 5. set github_client_id, github_client_secret in project/config/secrets.yml
 6. install Redis (http://redis.io/download)
-7. `redis-server` you might need to add --maxheap <size>, which sets the maximum amount of RAM Redis is allowed to use
+7. `redis-server` you might need to add --maxheap size, which sets the amount of RAM Redis is allowed to use, for example --maxheap 2000000000 for 2gb
 8. `rails s`
 
 You can now find the registration application at http://localhost:3000  
