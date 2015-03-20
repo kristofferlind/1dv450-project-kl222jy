@@ -25,7 +25,7 @@ Make sure you are in /client folder
 2. `npm install`
 3. `npm install -g grunt-cli`
 4. Log into registration, get api key and set this in client/src/scripts/utilities/web-api-utilities.js, clientKey
-5. `grunt serve`
+5. `grunt serve:dist`
 
 Client application should now have started and opened in a browser
 
