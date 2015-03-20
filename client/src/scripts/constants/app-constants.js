@@ -13,6 +13,7 @@ var AppConstants = {
         LOAD_STORIES: 'load-stories',
         LOAD_MORE_STORIES: 'load-more-stories',
         RECEIVE_STORIES: 'reveive-stories',
+        RECEIVE_MORE_STORIES: 'reveive-more-stories',
         RECEIVE_STORY: 'reveive-story',
         DESTROY_STORY: 'destroy-story',
         STORY_REMOVED: 'story-removed',
