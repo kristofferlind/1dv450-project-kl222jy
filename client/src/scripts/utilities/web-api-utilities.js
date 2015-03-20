@@ -1,5 +1,9 @@
 'use strict';
 
+//This is your API Key, log into registration application to get a working key.
+var clientKey = '6c747debaa8a1d177cc23d03f726f1a2';
+
+
 var AppConstants = require('../constants/app-constants');
 var ServerActions = require('../actions/server-actions');
 var request = require('superagent');
@@ -21,7 +25,7 @@ var WebAPIUtilities = {
         request.post(APIEndpoints.STORIES)
             .accept('application/json')
             .set('Content-Type', 'application/json')
-            .set('ClientKey', '6c747debaa8a1d177cc23d03f726f1a2')
+            .set('ClientKey', clientKey)
             .set('Authorization', 'Bearer ' + this.getToken())
             .send(story)
             .end(function(error, response) {
@@ -36,7 +40,7 @@ var WebAPIUtilities = {
     loadStories: function() {
         request.get(APIEndpoints.STORIES)
             .accept('application/json')
-            .set('ClientKey', '6c747debaa8a1d177cc23d03f726f1a2')
+            .set('ClientKey', clientKey)
             .end(function(error, response) {
                 if (error || response.error) {
                     handleErrors(error, response);
@@ -49,7 +53,7 @@ var WebAPIUtilities = {
     loadMoreStories: function(page) {
         request.get(APIEndpoints.STORIES + '?page=' + page)
             .accept('application/json')
-            .set('ClientKey', '6c747debaa8a1d177cc23d03f726f1a2')
+            .set('ClientKey', clientKey)
             .end(function(error, response) {
                 if (error || response.error) {
                     handleErrors(error, response);
@@ -62,7 +66,7 @@ var WebAPIUtilities = {
     removeStory: function(story) {
         request.del(APIEndpoints.STORIES + '/' + story.id)
             .set('Content-Type', 'application/json')
-            .set('ClientKey', '6c747debaa8a1d177cc23d03f726f1a2')
+            .set('ClientKey', clientKey)
             .set('Authorization', 'Bearer ' + this.getToken())
             .end(function(error, response) {
                 if (error || response.error) {
@@ -77,7 +81,7 @@ var WebAPIUtilities = {
         request.put(APIEndpoints.STORIES + '/' + story.id)
             .accept('application/json')
             .set('Content-Type', 'application/json')
-            .set('ClientKey', '6c747debaa8a1d177cc23d03f726f1a2')
+            .set('ClientKey', clientKey)
             .set('Authorization', 'Bearer ' + this.getToken())
             .send(story)
             .end(function(error, response) {
