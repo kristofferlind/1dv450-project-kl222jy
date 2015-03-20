@@ -20,10 +20,12 @@ Account information in db/seeds.rb
 ###Running the client application
 Make sure you are in /client folder
 
+
 1. install Node (https://nodejs.org/download/)
 2. `npm install`
 3. `npm install -g grunt-cli`
-4. `grunt serve`
+4. Log into registration, get api key and set this in client/src/scripts/utilities/web-api-utilities.js, clientKey
+5. `grunt serve`
 
 Client application should now have started and opened in a browser
 
