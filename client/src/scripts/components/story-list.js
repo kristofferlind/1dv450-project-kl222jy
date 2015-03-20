@@ -2,7 +2,6 @@
 
 var React = require('react/addons');
 var Story = require('./story');
-var InfiniteScroll = require('react-infinite-scroll')(React);
 var Alert = require('react-bootstrap').Alert;
 
 var StoryList = React.createClass({
